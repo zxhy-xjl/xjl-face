@@ -14,15 +14,14 @@ public interface FaceService {
 	 *
 	 */
 	 enum PhotoType {
-		 idPhoto, capturePhoto,uploadPhoto
-	 }
+		 idPhoto, capturePhoto2,uploadPhoto};
 	 /**
 	  * 上传人脸照片到人脸库中
 	  * @param idCode 身份证号码
 	  * @param photoType 照片类型
 	  * @param photo 照片
 	  */
-	public void addFacePhoto(String idCode, PhotoType photoType, byte[] photo);
+	public boolean addFacePhoto(String idCode, PhotoType photoType, byte[] photo);
 	/**
 	 * 核对人脸照片
 	 * @param idCode 身份证号码
