@@ -26,13 +26,13 @@ public class FaceServiceTest {
 	    
 	      //{"message":"发生错误：人脸定位失败，请检查图片中人脸是否清晰、明亮、端正！","code":-9,"success":false}
 	     photo= FileUtils.readFileToByteArray(FileUtils.toFile(FaceServiceTest.class.getResource("/data/uploadPhoto.png")));
-		 Assert.assertFalse(this.faceService.addFacePhoto("642223199308173627", FaceService.PhotoType.uploadPhoto, photo));
+		 Assert.assertFalse(this.faceService.addFacePhoto("640102196708120329", FaceService.PhotoType.uploadPhoto, photo));
 		
 		 photo = FileUtils.readFileToByteArray(FileUtils.toFile(FaceServiceTest.class.getResource("/data/idPhoto.png")));
-		 Assert.assertTrue(this.faceService.addFacePhoto("642223199308173627", FaceService.PhotoType.idPhoto, photo));
+		 Assert.assertTrue(this.faceService.addFacePhoto("640102196708120329", FaceService.PhotoType.idPhoto, photo));
 		
 		 photo = FileUtils.readFileToByteArray(FileUtils.toFile(FaceServiceTest.class.getResource("/data/capturePhoto.png")));
-		 Assert.assertTrue(this.faceService.addFacePhoto("642223199308173627", FaceService.PhotoType.capturePhoto2, photo));
+		 Assert.assertTrue(this.faceService.addFacePhoto("640102196708120329", FaceService.PhotoType.capturePhoto2, photo));
 		}
 	
 	

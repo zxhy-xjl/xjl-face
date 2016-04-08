@@ -44,7 +44,7 @@ public class FaceServiceImpl implements FaceService {
 		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,"http://172.25.1.26:8080/user/uploadBase64Picture.whtml");
 		if (hw != null) {
 			if ("true".equals(hw.getSuccess()) && "照片上传成功！".equals(hw.getMessage()) && "0".equals(hw.getCode())) {
-				log.debug("照片上传至汉王服务器成功");
+				log.debug("照片上传至汉王服务器成功 ");
 				return true;
 			} else {
 				log.debug(hw.getMessage());

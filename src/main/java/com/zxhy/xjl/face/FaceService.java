@@ -16,7 +16,7 @@ public interface FaceService {
 	 enum PhotoType {
 		 idPhoto, capturePhoto2,uploadPhoto};
 	 /**
-	  * 上传人脸照片到人脸库中
+	  * 上传人脸照片到人脸库中 
 	  * @param idCode 身份证号码
 	  * @param photoType 照片类型
 	  * @param photo 照片
