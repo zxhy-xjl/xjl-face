@@ -47,28 +47,76 @@ public class FaceServiceImpl implements FaceService {
 				log.debug("照片上传至汉王服务器成功 ");
 				return true;
 			} else {
-				log.debug(hw.getMessage());
 				log.debug("照片上传至汉王服务器失败");
 				return false;
 			}
 		} else {
-			log.debug(hw.getMessage());
 			log.debug("照片上传至汉王服务器失败");
 			return false;
 		}
 	}
 
 	public boolean checkFace(String idCode, PhotoType photoType, byte[] photo) {
-		// TODO Auto-generated method stub
-		return false;
+		NewCertificationin certin = new NewCertificationin();
+		certin.setCardId(idCode);
+		certin.setClientType("1");
+		certin.setImg(Utils.ToBase64(photo));
+		if (photoType == FaceService.PhotoType.idPhoto) {
+			certin.setPhotoType("2");
+		}
+		if (photoType == FaceService.PhotoType.capturePhoto2) {
+			certin.setPhotoType("1");
+		}
+		if (photoType == FaceService.PhotoType.uploadPhoto) {
+			certin.setPhotoType("3");
+		}
+
+		HwResult hw = null;
+		certin.setInterfacetype(NewCertificationin.INTERFACE_UPLOAD);
+		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,
+				"http://172.25.1.26:8080/recognize/faceRecognize.whtml");
+		if (hw != null) {
+			String recPass = hw.getVerify();
+			if ("true".equals(recPass)) {
+				log.debug("汉王照片比对成功");
+				return true;
+			} else {
+				log.debug("汉王照片比对失败");
+				return false;
+			}
+		} else {
+			log.debug("汉王服务器返回空值，比对失败");
+			return false;
+		}
 	}
 
 	public boolean checkFace(String idCode, byte[] photo) {
-		// TODO Auto-generated method stub
-		return false;
+		NewCertificationin certin = new NewCertificationin();
+		certin.setCardId(idCode);
+		certin.setClientType("1");
+		certin.setImg(Utils.ToBase64(photo));
+		HwResult hw = null;
+		certin.setInterfacetype(NewCertificationin.INTERFACE_UPLOAD);
+		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,
+				"http://172.25.1.26:8080/recognize/faceRecognize.whtml");
+		if (hw != null) {
+			String recPass = hw.getVerify();
+			if ("true".equals(recPass)) {
+				log.debug("汉王照片比对成功");
+				return true;
+			} else {
+				log.debug("汉王照片比对失败");
+				return false;
+			}
+		} else {
+			log.debug("汉王服务器返回空值，比对失败");
+			return false;
+		}
+		
+		
 	}
 	public byte[] getPhoto(String idCode, PhotoType photoType) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
