@@ -19,6 +19,25 @@ import com.ztesoft.utils.Utils;
 @Service
 public class FaceServiceImpl implements FaceService {
 	private static Log log = LogFactory.getLog(FaceServiceImpl.class);
+	private String faceUploadURL;
+	private String faceRecognizeURL;
+	
+	public String getFaceUploadURL() {
+		return faceUploadURL;
+	}
+
+	public void setFaceUploadURL(String faceUploadURL) {
+		this.faceUploadURL = faceUploadURL;
+	}
+
+	public String getFaceRecognizeURL() {
+		return faceRecognizeURL;
+	}
+
+	public void setFaceRecognizeURL(String faceRecognizeURL) {
+		this.faceRecognizeURL = faceRecognizeURL;
+	}
+
 	public boolean addFacePhoto(String idCode, PhotoType photoType, byte[] photo) {
 		log.debug("idCode:" + idCode);
 		log.debug("photoType:" + photoType);
@@ -40,8 +59,7 @@ public class FaceServiceImpl implements FaceService {
 		}
 		HwResult hw = null;
 		certin.setInterfacetype(NewCertificationin.INTERFACE_UPLOAD);
-		// hw=com.ztesoft.facefunction.FaceCert.faceCert(certin,"http://172.25.1.26:8080/recognize/faceRecognize.whtml");
-		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,"http://172.25.1.26:8080/user/uploadBase64Picture.whtml");
+		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,this.faceUploadURL);
 		if (hw != null) {
 			if ("true".equals(hw.getSuccess()) && "照片上传成功！".equals(hw.getMessage()) && "0".equals(hw.getCode())) {
 				log.debug("照片上传至汉王服务器成功 ");
@@ -74,7 +92,7 @@ public class FaceServiceImpl implements FaceService {
 		HwResult hw = null;
 		certin.setInterfacetype(NewCertificationin.INTERFACE_UPLOAD);
 		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,
-				"http://172.25.1.26:8080/recognize/faceRecognize.whtml");
+				this.faceRecognizeURL);
 		if (hw != null) {
 			String recPass = hw.getVerify();
 			if ("true".equals(recPass)) {
@@ -98,7 +116,7 @@ public class FaceServiceImpl implements FaceService {
 		HwResult hw = null;
 		certin.setInterfacetype(NewCertificationin.INTERFACE_UPLOAD);
 		hw = com.ztesoft.facefunction.FaceCert.faceCert(certin,
-				"http://172.25.1.26:8080/recognize/faceRecognize.whtml");
+			this.faceRecognizeURL);
 		if (hw != null) {
 			String recPass = hw.getVerify();
 			if ("true".equals(recPass)) {
